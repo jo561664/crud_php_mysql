@@ -1,9 +1,10 @@
 <?php
   require_once "./php/conexion.php";
   $palabra = $_POST['palabra'];
-  $query = "SELEC * FROM tbl_usuario WHERE nombre LIKE'%$palabra%'";
+  $query = "SELECT * FROM tbl_usuario WHERE nombre LIKE'%$palabra%'";
   
-  if(SQL($query)){
+  	$consulta = SQL($query);
+  	if($consulta->num_rows >=1){
 ?>
    <table class="table-hover table-condensed table-bordered">
 					<tr>
@@ -17,7 +18,6 @@
 				<?php 
 					while($fila = $consulta->fetch_object()){
 				 ?>
-					
 					<tr>
 						<td><img style="width: 50px; height: 50px;" src="http://localhost:2001/coursephp/crud_php_mysql/img/<?php echo $fila->foto; ?>" alt=""></td>
 						<td><?php echo $fila->nombre; ?></td>
